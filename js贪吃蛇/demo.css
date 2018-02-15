@@ -1,0 +1,113 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.wrapper{
+    
+    position: fixed;
+    left:50%;
+    top:0px;
+    width:400px;   
+    margin-left:-200px;
+    background: #ccc;
+    height:120px;
+}
+
+.input{
+    position: absolute;
+    width:250px;
+    height:120px;
+    background: #3c4;
+}
+
+.wrapper .input input{
+    width:120px;
+    height:30px;
+    margin-top: 3px;
+    border:1px solid deepskyblue;
+    display:inline-block;
+}
+
+.input p{
+    margin-left:10px;
+    margin-top: 3px;
+    width:50px;
+    line-height:30px;
+    display:inline-block;
+    font-size:18px;
+}
+
+.input .start{
+    margin-right:3px;
+    position: absolute;
+    right:0px;
+    top:50%;
+    margin-top:-30px;
+    width:50px;
+    height:60px;
+    font-size: 18px;
+    background: deepskyblue;
+    color:#fff;
+}
+.wrapper .screen{
+    position: absolute;
+    top: 0px;
+    right:0px;
+    width:140px;
+}
+.wrapper .screen input{
+    width:80px;
+    height:30px;
+    margin-top: 3px;
+    border:1px solid deepskyblue;
+    margin-top:18px;
+    display:inline-block;
+}
+.wrapper .screen p{
+    margin-top:18px;
+    display:inline-block;
+}
+
+.main{
+    border:1px solid #444444;
+    position: fixed;
+    top:150px;
+    left:100px;
+}
+
+.main ul{
+    font-size:0px;
+    position: relative;
+    list-style: none;
+    border:1px solid #fff;
+}
+
+.main ul::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.main ul li{
+    font-size:0px;
+    margin: 1px;
+    height: 15px;
+    width: 15px;
+    float: left;
+    list-style: none; 
+    position: relative;
+    border:1px solid #000;
+    background: #DCE2F1;
+}
+
+.main ul li.food{
+    border:1px solid #fff;
+    background:#FF7256;
+    border-radius: 50%;
+}
+
+.main ul li.snake{
+    border:1px solid #fff;
+    background:rgb(187, 250, 69);
+}
