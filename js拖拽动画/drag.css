@@ -1,0 +1,61 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+.drag{
+    width:100px;
+    height:100px;
+    background: rgba(166, 224, 28, 0.884);
+    position: absolute;
+}
+.drag:hover {
+    cursor: pointer;
+}
+.wrapper{
+    position: fixed;
+    top:0px;
+    left:50%;
+    width:320px;
+    margin-left: -160px;
+    background: #ccc;
+    text-align: center;  
+}
+.top{       
+    height:50px;
+    text-align: center;   
+    background: #ffcc33;
+    line-height: 50px;    
+}
+.input{
+    height:80px;
+}
+.input input{
+    width:50px;           
+    font-size:18px;
+    font-weight: 300;    
+    border:1px solid deepskyblue;
+}    
+.input p,
+    input{        
+    vertical-align: middle;
+    display: inline-block;
+}
+.input .font p{
+    line-height: 40px;
+}
+.input button{
+    background: deepskyblue;
+    width:50px;
+    height:80px;
+    color: #fff;
+    font-size:18px;
+    font-weight: 400;
+}
+.input .font{
+    width:200px;
+    height:80px;
+    display: inline-block;
+}
+.input .button{
+    float:right;
+}

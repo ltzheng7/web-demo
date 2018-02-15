@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>拖拽动画</title>
+    <link rel="stylesheet" href="drag.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="top">请输入数值，然后拖拽小方块</div>
+        <div class="input">
+            <div class="font">
+                <p>重力加速度(g):</p>
+                <input type="text" placeholder="请输入垂直方向重力加速度" value="3">
+                <p>摩擦力系数(u):</p>
+                <input type="text" placeholder="请输入摩擦力（空气阻力）系数" value="0.95">
+            </div>
+            <div class="button">
+                <button class='start'>重开</button>
+                <button class='enter'>确定</button>
+            </div>            
+        </div>
+    </div>
+    <div class="drag"></div>
+    <script src="drag.js"></script>
+</body>
+</html>
