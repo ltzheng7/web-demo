@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>waterfull</title>
+    <style>
+        *{
+            margin:0px;
+            padding:0px;
+        }
+        #waterfull{
+            position: absolute;  
+        }
+        #waterfull div img{
+            display: inline-block; 
+   
+        }
+        #waterfull div div{
+            box-sizing: border-box; 
+            border:1px solid #444; 
+            display: inline-block;
+            position: absolute;  
+            margin-left:5px;
+            margin-top: 5px;   
+            /* word-break: break-all; */
+        }
+        #waterfull div p{
+            /* overflow:hidden;white-space:nowrap;text-overflow:ellipsis; */
+            word-wrap:break-word;  
+            word-break:break-all;   
+            display: block;
+            font-size: 12px;
+        }
+        #waterfull div .text{
+            height:16px;
+            font-size: 12px;
+            width:100%;
+            overflow:hidden;
+            white-space:nowrap;
+            text-overflow:ellipsis;
+            position: relative;
+            /* word-wrap:break-word;  
+            word-break:break-all;   */
+
+            display:block;
+            border:0px;
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="waterfull"></div>
+    <script>
+        var img = document.getElementsByClassName('picture');
+        var div_img = document.getElementsByClassName('div-picture');
+        var oWidth = document.body.clientWidth;
+        var page = 1;
+        var columns = 4;
+        var oData = [];
+        var heightNum = [];
+        var order = [];
+        var flag = true;
+        //ajax函数
+        var ajaxFunc = function(method,url,callback,data,flag){
+            var xhr = null;
+            xhr = new XMLHttpRequest() ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHttp');
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState==4){
+                    if(xhr.status==200){
+                        callback(xhr.responseText);
+                    }else{
+                        alert('error');
+                    }
+                }
+            }
+            method = method.toUpperCase();
+            if(method=='GET'){
+                var date = new Date(),
+                    timer = date.getTime();
+                xhr.open(method,url + '?' + data + '&timer=' + timer, flag);
+                xhr.send();
+            }else if(method=='POST'){
+                xhr.open(method,url,flag);
+                xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+                xhr.send(data);
+            }
+        }
+        //兼容性遍历下一个节点
+        var nextnode = function(node) {
+            if (node.nodeType === 1) { //判断是否是元素节点,排除空的文本节点
+                return node;
+            }
+            if (node.nextSibling) {
+                return nextnode(node.nextSibling);
+            }
+        }
+        //获得序号元素       
+        var getWitch = function(parent,index){
+            var witch = parent.firstElementChild;
+            for(var i=1;i<index;i++){
+                witch = nextnode(witch.nextSibling);
+            }
+            return witch;
+        } 
+        //创建结构，展示图片
+        var showPicture = function(data){          
+            var value = JSON.parse(data);
+            oData[page-1] = value;
+            var str = '';
+            if(waterfull.children.length<page){
+                waterfull.appendChild(document.createElement("div"));
+            } 
+            value.forEach(function(ele){
+                str += '<div class="div-picture"><img height="' + ele.height + '" width="' + ele.width + '" class="picture"  src=' + ele.image + ' style="width:' + oWidth/columns + 'px; "><div class="text">id：' + ele.id + '</div><div class="text">title:' + ele.title + '</div></div>';
+            });            
+            getWitch(waterfull,page).innerHTML = str;      
+            getColumns(oWidth);
+            changePlace(page-1);
+        }       
+        
+
+        //判断到页面底部
+        window.onscroll = function(){
+            var scrollT = document.documentElement.scrollTop||document.body.scrollTop;
+            var scrollH = document.documentElement.scrollHeight||document.body.scrollHeight;
+            var clientH = document.documentElement.clientHeight||document.body.clientHeight;                       
+             if(scrollT == scrollH - clientH){
+                if(flag){
+                    flag = false;
+                    page = waterfull.children.length+1;
+                    ajaxFunc('GET','./getPics.php',showPicture,'cpage='+page,true);  
+                }               
+            }
+        }
+        //获取屏幕宽度
+        window.onresize = function(){            
+            oWidth = document.body.clientWidth;            
+            heightNum= [];
+            getColumns(oWidth);
+            changePlace(0);            
+        }
+
+        //根据宽口宽度，改变列数
+        var getColumns = function(width){            
+            switch(true){
+                case (width>=1500) : columns=4;
+                    break;
+                case (width<1500&&width>=900) : columns=3;
+                    break;
+                case (width<900&&width>=400) : columns=2;
+                    break;
+                case (width<400) : columns=1;
+                    break;
+            }            
+        }
+
+        //改变宽度后重排
+        var changePlace = function(start){           
+            for(var i =start;i<page;i++){
+                if(!oData[i]){
+                    return false;
+                }else{                    
+                    var _len = oData[i-1]?oData[i-1].length:0;
+                    var len = oData[i].length ;
+                    for(var j =0;j<len;j++){ 
+                        div_img[i*_len+j].style.width = oWidth/columns - 5 +'px';
+                        img[i*_len+j].style.width = oWidth/columns - 7 +'px';
+                        img[i*_len+j].style.height = 'auto';
+                        if(img[i*_len+j].clientHeight==0){
+                            img[i*_len+j].style.height = parseFloat(img[i*page+j].height/img[i*page+j].width)*parseFloat(img[i*page+j].style.width ) +'px';
+                        }                        
+                        if(i==0&&j<columns){  
+                            div_img[i*_len+j].style.left=j*(oWidth/columns) +'px';
+                            div_img[i*_len+j].style.top= '0px';
+                            heightNum[j] = img[i*_len+j].clientHeight + 50;
+                        }else{
+                            div_img[i*_len+j].style.left = order[0]*(oWidth/columns) +'px';  
+                            div_img[i*_len+j].style.top= heightNum[order[0]] +'px';
+                            heightNum[order[0]] += img[i*_len+j].clientHeight + 50;
+                        }
+                        reorderHNum(heightNum);
+                        if(i==page-1&&j==len-1){
+                            flag = true;
+                        }
+                    }
+                }                
+            }
+        }
+        //计算长度，排序
+        var reorderHNum = function(arr){
+            order = [];
+            var _order = [];
+            for(var i =0 ;i<columns;i++){
+                var num = 0;
+                for(var j =0;j<columns;j++){                    
+                    if(arr[i]>arr[j]){
+                        num++;
+                    }
+                }
+                _order[i] = num;
+            }
+            for(var i =0 ;i<columns;i++){
+                for(var j =0;j<columns;j++){
+                    if(_order[j]==i){
+                        order[i]=j;
+                    }
+                }               
+            }
+            return (order);
+        }
+        ajaxFunc('GET','./getPics.php',showPicture,'cpage='+page,true); 
+    </script>
+</body>
+
+</html>
