@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>setCookie</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+
+        div{
+            width:100px;
+            height: 100px;
+            background: orange;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id='oDiv'></div>
+    <script>
+        var _X,
+            _Y,
+            oX,
+            oY;
+        var position = [];            
+        
+        oDiv.addEventListener('mousedown',function(){
+            _X = event.offsetX;
+            _Y = event.offsetY;   
+            oDiv.addEventListener('mouseup',up);
+            document.addEventListener('mousemove',getXY)
+            oDiv.addEventListener('mousemove',move ) ;
+        }) 
+        var getXY =function(){
+            oX = event.clientX;
+            oY = event.clientY;
+            oDiv.style.left = oX - _X +'px';
+            oDiv.style.top = oY - _Y +'px';
+
+        }
+        var up = function(){
+            position[0] = oDiv.style.left;
+            position[1] = oDiv.style.top;
+            o_cookie
+                .setCookie('positionX',position[0],10000)
+                .setCookie('positionY',position[1],10000);
+            oDiv.removeEventListener('mouseup',up);
+            oDiv.removeEventListener('mousemove',move);
+            document.removeEventListener('mousemove',getXY);
+        }
+        var move = function(){ 
+        }
+
+        var o_cookie ={
+            setCookie :function(name,value,time){
+                document.cookie=name + "=" + value +";Max-Age="+time +';';
+                return this;
+            },
+            getCookie : function(name,callback){               
+                var allCookie = document.cookie.split(';');
+                for(var i = 0;i<allCookie.length;i++){
+                    var _cookie = allCookie[i].split('=');
+                _cookie[0] = _cookie[0].replace(/^\s*|\s*$/,'');
+                    if(_cookie[0]==name){
+                        callback(_cookie[1]);
+                        return this;
+                    }                    
+                }
+                return undefined;
+            },
+            delCookie:function(name){
+                this.setCookie(name,'',-1);
+                return this;
+            }
+        } 
+        var setX = function(value){
+            oDiv.style.left = value;
+        }
+
+        var setY = function(value){
+            oDiv.style.top = value;
+        }
+        var check = function(value){
+            return value;
+        }
+        var init = function(){
+            if(o_cookie.getCookie('positionX',check)){
+                o_cookie
+                    .getCookie('positionX',setX)
+                    .getCookie('positionY',setY);
+            }
+        }  
+        init();
+    </script>
+</body>
+</html>
