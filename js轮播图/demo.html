@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>javascript实现轮播图</title>
+    <link rel="stylesheet" href="demo.css">
+</head>
+<body id='main'>
+    <div class="input">
+        <div class="left">
+            <div class="leftTop">
+                <p>图片路径:</p>
+                <input class='imgSrc' value="./img" type="text" placeholder="./img">
+                <p>图片数量（≤5）:</p>
+                <input class='imgNumber' value="4" type="text" placeholder="4">
+            </div>
+            <div class="leftButtom">
+                <p>播放速度:</p>
+                <select clsaa='imgSpeed' id='imgSpeed'>
+                    <option value ="1">快速</option>
+                    <option value ="2" selected>中速</option>
+                    <option value="3">慢速</option>
+                </select> 
+                <p>图片宽度（950）:</p>
+                <input class='imgWidth' value="950" type="text" placeholder="950">
+                
+            </div>            
+        </div>
+        <div class="right">
+            <button class='cancel' >取消</button>
+            <button class='enter' >确定</button>
+        </div>
+        
+    </div>
+    <script src="./demo.js"></script>
+</body>
+</html>
