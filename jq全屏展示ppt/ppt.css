@@ -1,0 +1,116 @@
+*{
+    margin:0px;
+    padding: 0px;
+}
+
+html,
+body,
+.all,
+.wrapper{
+    width:100%;
+    height:100%;
+}
+
+.wrapper{
+    background: #d5c59f;
+    position: absolute;
+    overflow: hidden;   
+}
+.wrapper .ppt{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 200px;
+    background-size: cover;
+    background-position: center center;
+    position: relative;    
+}
+.wrapper .ppt .ppt-img{
+    /* position: absolute;  
+    box-sizing: border-box;
+    float: right;
+    right:0px;
+    margin-right:200px;
+    margin-top:300px; */
+}
+
+.wrapper .ppt:nth-child(1) img{
+    width: 40%;
+}
+.wrapper .ppt img{
+    float: right;
+    width: 0%;
+}
+.wrapper .ppt .ppt-text{
+    word-wrap:break-word ;
+    text-align: left;
+    color: antiquewhite;
+    position: relative; 
+    box-sizing: border-box;
+    float: left;
+    width:30%;
+}
+.wrapper .ppt p{
+    width:100%;
+    font-size: '16px';
+}
+.wrapper .ppt:nth-child(1) p{
+    font-size: '20px';
+}
+.wrapper .ppt:nth-child(1){
+    background-image: url('./img/bg-1.jpg');
+}
+
+.wrapper .ppt:nth-child(2){
+    background-image: url('./img/bg-2.jpg');
+}
+
+.wrapper .ppt:nth-child(3){
+    background-image: url('./img/bg-3.jpg');
+}
+
+.btn-leftRight .btn-left img,
+    .btn-right img{
+    width:30px;
+    height:50px;
+    position:absolute;
+    top:50%;
+    margin-top:-25px;
+}
+
+.btn-leftRight  .btn-left img{
+    float: left;
+    left:50px;
+}
+
+.btn-leftRight .btn-right img{
+    float: right;
+    right:50px;
+}
+
+.btn-index{
+    width:100%;
+    position: absolute;
+    bottom: 50px;    
+    
+}
+.btn-index ul{
+    text-align: center;
+    width:100%;
+    display:inline-block; 
+}
+.btn-index li{
+    
+    width:20px;
+    height:20px;
+    border-radius: 50%;
+    background: #ccc;
+    list-style: none;
+    display: inline-block;  
+    margin:0px 10px;
+    position: relative;
+}
+
+.btn-index li.active{
+    background: rgb(145, 175, 9);  
+}
