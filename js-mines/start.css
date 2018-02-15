@@ -1,0 +1,162 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+
+.wrapper{
+    position: fixed;
+    left:50%;
+    top:0px;
+    width:400px;   
+    margin-left:-200px;
+    background: #ccc;
+    height:120px;
+}
+
+.input{
+    position: absolute;
+    width:250px;
+    height:120px;
+    background: #3c4;
+}
+
+.wrapper .input input{
+    width:120px;
+    height:30px;
+    margin-top: 3px;
+    border:1px solid deepskyblue;
+    display:inline-block;
+}
+
+.input p{
+    margin-left:10px;
+    margin-top: 3px;
+    width:50px;
+    line-height:30px;
+    display:inline-block;
+    font-size:18px;
+}
+
+.input .enter{
+    margin-right:3px;
+    position: absolute;
+    right:0px;
+    top:50%;
+    margin-top:-30px;
+    width:50px;
+    height:60px;
+    font-size: 18px;
+    background: deepskyblue;
+    color:#fff;
+}
+.wrapper .screen{
+    position: absolute;
+    top: 0px;
+    right:0px;
+    width:140px;
+}
+.wrapper .screen input{
+    width:80px;
+    height:30px;
+    margin-top: 3px;
+    border:1px solid deepskyblue;
+    margin-top:18px;
+    display:inline-block;
+}
+.wrapper .screen p{
+    margin-top:18px;
+    display:inline-block;
+}
+
+#main{
+    display: block;
+    border:1px black solid;
+    top:150px;
+    position: absolute;
+    left:100px;
+
+}
+
+#main ul{
+    float: none;  
+    clear: left;
+    display: block;
+    position: relative;
+}
+
+#main ul::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+
+ul li{
+    height:50px;
+    width:50px;
+    border:1px black solid;
+    float:left;
+    display: block;
+    list-style: none;
+    position: relative;
+}
+
+ul li div{
+    height:50px;
+    width:50px;
+    background-color: #777; 
+    position: absolute;
+    z-index: 0;
+}
+
+ul li p{
+    line-height: 50px;
+    height:50px;
+    width:50px;
+    font-size:20px;
+    text-align: center;
+    position: absolute;
+    z-index: -10;
+}
+
+ul li div img{
+    height:50px;
+    width:50px;
+    position: absolute;
+    z-index: -10;
+}
+
+ul li div .start{
+    z-index: 0;  
+}
+
+ul li div .showed{
+    z-index: -50;  
+}
+
+ul li div .flag{
+    z-index: -40;  
+}
+
+ul li div .mine{
+    z-index: -30;  
+}
+
+ul li div .mouseover{
+    z-index: -20;  
+}
+
+ul li.showed div .showed{
+    z-index: 10;
+}
+ul li.showedNumber p{
+    z-index: 10;
+}
+ul li.showedNumber div .showed{
+    z-index: 0;
+}
+ul li#flag div .flag{
+    z-index: 10;
+}
+ul li.over div .mine{
+    z-index: 10;  
+}
